@@ -1,4 +1,13 @@
 {
+  "name": "api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/app.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon build/app.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -17,6 +26,7 @@
     "@types/jsonwebtoken": "^9.0.1",
     "@types/morgan": "^1.9.4",
     "@types/passport": "^1.0.12",
-    "@types/passport-local": "^1.0.35"
+    "@types/passport-local": "^1.0.35",
+    "typescript": "^5.0.4"
   }
 }
