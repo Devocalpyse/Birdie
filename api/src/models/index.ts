@@ -3,11 +3,11 @@ import { UserFactory } from './User';
 import { AssociateUserMessage, MessageFactory } from './Message';
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME!,
-  process.env.DB_USER!,
-  process.env.DB_PASSWORD!,
+  process.env.NAME!,
+  process.env.USER!,
+  process.env.PASS!,
   {
-    host: process.env.DB_HOST,
+    host: process.env.HOST,
     port: parseInt(process.env.DB_PORT!),
     dialect: 'mysql',
   }

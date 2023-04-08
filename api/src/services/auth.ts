@@ -26,8 +26,8 @@ export async function verifyUser(req: Request) {
   if (header) {
     const token = header.split(' ')[1];
     try {
-      const decoded = jwt.verify(token, secret);
-      return decoded;
+      let decoded: any = await jwt.verify(token, secret);
+      return User.findByPk(decoded.userId);
     } catch (err) {
       return null;
     }
