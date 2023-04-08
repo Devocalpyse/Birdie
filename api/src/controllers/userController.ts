@@ -20,11 +20,9 @@ export const createUser: RequestHandler = async (req, res, next) => {
 export const loginUser: RequestHandler = async (req, res, next) => {
   let user: User | null = await User.findOne({ where: { username: req.body.username } });
 
-  //   if user exists, compare password
   if (user) {
     let match = await compare(req.body.password, user.password);
 
-    // if match, create token
     if (match) {
       let token = await signToken(user);
       res.status(200).json({ token });
