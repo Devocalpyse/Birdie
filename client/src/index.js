@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserProvider from './contexts/UserProvider'; 
 import App from './App';
-import 'bulmaswatch/lumen/bulmaswatch.scss'
+import 'bulmaswatch/lumen/bulmaswatch.scss';
+import 'dotenv/config';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

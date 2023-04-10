@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "build": "tsc",
-    "start": "node src/app.js",
+    "start": "node src/app.ts",
     "dev": "concurrently \"tsc -w\" \"nodemon build/app.js\"",
     "test": "mocha -r ts-node/register 'src/tests/**/*.ts'"
   },
