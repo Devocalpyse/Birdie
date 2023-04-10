@@ -11,34 +11,22 @@ export function UserProvider(props) {
   async function createUser(username, password, firstName, lastName, favoriteColor) {
     let user = { username, password, firstName, lastName, favoriteColor };
 
-    try {
-      let res = await axios.post(baseUrl, user);
-      return new Promise((resolve) => resolve(res));
-    } catch (err) {
-      console.error(err);
-    }
+    let res = await axios.post(baseUrl, user);
+    return new Promise((resolve) => resolve(res));
   }
 
   // Function to login a user
   async function loginUser(username, password) {
     let user = { username, password };
 
-    try {
-      let res = await axios.post(`${baseUrl}/login`, user);
-      localStorage.setItem('token', res.data.token);
-    } catch (err) {
-      console.error(err);
-    }
+    let res = await axios.post(`${baseUrl}/login`, user);
+    localStorage.setItem('token', res.data.token);
   }
 
   //   Function to get a user's details by id
   async function getUser(userId) {
-    try {
-      let res = await axios.get(`${baseUrl}/${userId}`);
-      return new Promise((resolve) => resolve(res));
-    } catch (err) {
-      console.error(err);
-    }
+    let res = await axios.get(`${baseUrl}/${userId}`);
+    return new Promise((resolve) => resolve(res));
   }
 
   return (

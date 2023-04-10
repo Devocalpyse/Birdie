@@ -5,15 +5,19 @@ import { hash, compare, signToken, verifyUser } from '../services/auth';
 export const createUser: RequestHandler = async (req, res, next) => {
   let newUser: User = req.body;
 
-  if (newUser.username && newUser.password && newUser.firstName && newUser.lastName) {
-    let hashedPassword = await hash(newUser.password);
-    newUser.password = hashedPassword;
+  try {
+    if (newUser.username && newUser.password && newUser.firstName && newUser.lastName) {
+      let hashedPassword = await hash(newUser.password);
+      newUser.password = hashedPassword;
 
-    let createdUser = await User.create(newUser);
+      let createdUser = await User.create(newUser);
 
-    res.status(201).json(createdUser);
-  } else {
-    res.status(400).send('Bad Request');
+      res.status(201).json(createdUser);
+    } else {
+      res.status(400).send('Bad Request');
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
 };
 
