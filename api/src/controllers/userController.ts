@@ -29,7 +29,8 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
     if (match) {
       let token = await signToken(user);
-      res.status(200).json({ token });
+      let { userId } = user;
+      res.status(200).json({ token, userId });
     } else {
       res.status(401).send('Wrong password');
     }

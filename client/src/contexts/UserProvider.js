@@ -1,13 +1,21 @@
 import axios from 'axios';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
 export const UserContext = createContext();
 
 export function UserProvider(props) {
+  const [user, setUser] = useState({
+    userId: '',
+    username: '',
+    firstName: '',
+    lastName: '',
+    favoriteColor: '',
+  });
+
   // Defining base url for users
   const baseUrl = process.env.BASE_URL_USERS;
 
-  //   Function to create a new user
+  // Function to create a new user
   async function createUser(username, password, firstName, lastName, favoriteColor) {
     let user = { username, password, firstName, lastName, favoriteColor };
 
@@ -21,17 +29,25 @@ export function UserProvider(props) {
 
     let res = await axios.post(`${baseUrl}/login`, user);
     localStorage.setItem('token', res.data.token);
+
+    let state = getUser(res.data.userId);
+    setUser(state);
   }
 
-  //   Function to get a user's details by id
+  // Function to get a user's details by id
   async function getUser(userId) {
-    let res = await axios.get(`${baseUrl}/${userId}`);
+    const token = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    let res = await axios.get(`${baseUrl}/${userId}`, { headers: token });
     return new Promise((resolve) => resolve(res));
   }
 
   return (
     <UserContext.Provider
       value={{
+        user,
         createUser,
         loginUser,
         getUser,
