@@ -48,4 +48,17 @@ export function MessageProvider(props) {
     let res = await axios.put(`${baseUrl}/${message.id}`, message, { headers: token });
     return new Promise((resolve) => resolve(res));
   }
+
+  return (
+    <MessageContext.Provider
+      value={{
+        messages,
+        getAllMessages,
+        getMessageById,
+        createMessage,
+        updateMessage,
+      }}>
+      {props.children}
+    </MessageContext.Provider>
+  );
 }

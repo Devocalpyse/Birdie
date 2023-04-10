@@ -42,8 +42,9 @@ export const getUser: RequestHandler = async (req, res, next) => {
   let user: User | null = await verifyUser(req);
 
   if (user) {
-    let { username, firstName, lastName, favoriteColor } = user;
+    let { userId, username, firstName, lastName, favoriteColor } = user;
     res.status(200).json({
+      userId,
       username,
       firstName,
       lastName,
