@@ -39,6 +39,17 @@ export function UserProvider(props) {
     });
   }
 
+  function logOut() {
+    localStorage.removeItem('token');
+    setUser({
+      userId: '',
+      username: '',
+      firstName: '',
+      lastName: '',
+      favoriteColor: null,
+    })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -46,6 +57,7 @@ export function UserProvider(props) {
         createUser,
         loginUser,
         getUser,
+        logOut,
       }}>
       {props.children}
     </UserContext.Provider>

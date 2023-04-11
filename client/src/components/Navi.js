@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../contexts/UserProvider';
 
 export default function Navi() {
-  let { user } = useContext(UserContext);
+  let { user, logOut } = useContext(UserContext);
 
   function userCheck() {
     if (user.userId === '') {
@@ -23,7 +23,9 @@ export default function Navi() {
           <Link to={`/profile/${user.userId}`} className='button is-dark'>
             View Profile
           </Link>
-          <button className='button is-danger'>Log Out</button>
+          <button className='button is-danger' onClick={() => logOut()}>
+            Log Out
+          </button>
         </div>
       );
     }
