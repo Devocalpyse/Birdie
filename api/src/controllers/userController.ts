@@ -4,9 +4,10 @@ import { hash, compare, signToken, verifyUser } from '../services/auth';
 
 export const createUser: RequestHandler = async (req, res, next) => {
   let newUser: User = req.body;
+  console.log(newUser);
 
   try {
-    if (newUser.username && newUser.password && newUser.firstName && newUser.lastName) {
+    if (newUser.username && newUser.password && newUser.firstName && newUser.lastName && newUser.favoriteColor) {
       let hashedPassword = await hash(newUser.password);
       newUser.password = hashedPassword;
 

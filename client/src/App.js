@@ -4,6 +4,7 @@ import Navi from './components/Navi';
 import Home from './components/Home';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Route path='/' element={<Home />}>
           <Route index element={<Feed />} />
         </Route>
-        {/* <Route path='signIn' element={<SigIn />} />
-        <Route path='signUp' element={<SignUp />} /> */}
+        {/* <Route path='signIn' element={<SigIn />} /> */}
+        <Route path='signUp' element={<SignUp />} />
         <Route path='profile' element={<Profile />}>
           <Route path=':userId' element={<Feed />} />
           <Route path='*' element={<p>User not found.</p>} />

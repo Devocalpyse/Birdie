@@ -9,18 +9,16 @@ export function UserProvider(props) {
     username: '',
     firstName: '',
     lastName: '',
-    favoriteColor: '',
+    favoriteColor: null,
   });
 
   // Defining base url for users
   const baseUrl = 'http://localhost:3000/api/users';
 
   // Function to create a new user
-  async function createUser(username, password, firstName, lastName, favoriteColor) {
-    let user = { username, password, firstName, lastName, favoriteColor };
-
+  async function createUser(user) {
     let res = await axios.post(baseUrl, user);
-    return new Promise((resolve) => resolve(res));
+    return new Promise((resolve) => resolve(res.data));
   }
 
   // Function to login a user
