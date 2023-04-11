@@ -6,7 +6,7 @@ export default function Navi() {
   let { user } = useContext(UserContext);
 
   function userCheck() {
-    if (user.userId === '') {
+    if (user.username === '') {
       return (
         <div className='buttons'>
           <Link to='/signIn' className='button is-dark'>
@@ -20,10 +20,9 @@ export default function Navi() {
     } else {
       return (
         <div className='buttons'>
-          <div>
-            <p className='has-text-grey'>Signed in as:</p>{' '}
-            <button className='button is-dark'>{user.username}</button>
-          </div>
+          <Link to={`/profile/${user.userId}`} className='button is-dark'>
+            View Profile
+          </Link>
           <button className='button is-danger'>Log Out</button>
         </div>
       );
@@ -40,7 +39,7 @@ export default function Navi() {
       <div className='navbar-start'>
         <div className='navbar-item'>
           <Link to='/' className='button is-success'>
-            Message Feed
+            Message Board
           </Link>
         </div>
       </div>

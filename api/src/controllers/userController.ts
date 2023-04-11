@@ -23,6 +23,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
 
 export const loginUser: RequestHandler = async (req, res, next) => {
   let user: User | null = await User.findOne({ where: { username: req.body.username } });
+  console.log(user);
 
   if (user) {
     let match = await compare(req.body.password, user.password);
@@ -40,17 +41,19 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 };
 
 export const getUser: RequestHandler = async (req, res, next) => {
-  let user: User | null = await verifyUser(req);
+  let user: User | null = await User.findByPk(req.params.userId);
 
   if (user) {
     let { userId, username, firstName, lastName, favoriteColor } = user;
-    res.status(200).json({
+    let returnUser = {
       userId,
       username,
       firstName,
       lastName,
       favoriteColor,
-    });
+    };
+    console.log('What the user variable looks like at the controller level: ', returnUser);
+    res.status(200).json(returnUser);
   } else {
     res.status(401).send();
   }

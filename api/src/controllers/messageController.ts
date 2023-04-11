@@ -3,8 +3,8 @@ import { Message } from '../models/Message';
 import { User } from '../models/User';
 import { verifyUser } from '../services/auth';
 
-export const getAllMessages: RequestHandler = async (req, res) => {
-  const messages = await Message.findAll();
+export const getAllMessages: RequestHandler = async (req, res, next) => {
+  const messages = await Message.findAll({ include: [User], order: [['updatedAt', 'DESC']] });
   res.status(200).json(messages);
 };
 
