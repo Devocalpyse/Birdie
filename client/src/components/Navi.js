@@ -39,7 +39,7 @@ export default function Navi() {
       </div>
       <div className='navbar-start'>
         <div className='navbar-item'>
-          <Link to='/messages' className='button is-success'>
+          <Link to='/' className='button is-success'>
             Message Feed
           </Link>
         </div>
