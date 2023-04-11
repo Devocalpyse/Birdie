@@ -9,7 +9,7 @@ export function UserProvider(props) {
     username: '',
     firstName: '',
     lastName: '',
-    favoriteColor: ''
+    favoriteColor: '',
   });
 
   // Defining base url for users
@@ -30,22 +30,16 @@ export function UserProvider(props) {
     let res = await axios.post(`${baseUrl}/login`, user);
     localStorage.setItem('token', res.data.token);
 
-    let state = getUser(res.data.userId);
+    let state = getUser(res.userId);
     setUser(state);
   }
 
   // Function to get a user's details by id
-  async function getUser(userId) {
-    let path = `${baseUrl}/${userId}`;
-    return await axios
-      .get(path)
-      .then((res) => {
-        console.log(res.data)
-        setUser(res.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  function getUser(userId) {
+    return axios.get(`${baseUrl}/${userId}`).then((res) => {
+      console.log(res.data);
+      return new Promise((resolve) => resolve(res.data));
+    });
   }
 
   return (

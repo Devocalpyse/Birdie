@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div>
-      <Hero success>
+      <Hero primary>
         <Hero.Body>
           <h1 className='title has-text-centered'>Message Board</h1>
           {user.firstName ? (

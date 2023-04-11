@@ -6,7 +6,7 @@ export default function Navi() {
   let { user } = useContext(UserContext);
 
   function userCheck() {
-    if (user.username === '') {
+    if (user.userId === '') {
       return (
         <div className='buttons'>
           <Link to='/signIn' className='button is-dark'>
@@ -30,21 +30,33 @@ export default function Navi() {
   }
 
   return (
-    <nav className='navbar is-info'>
+    <nav className='navbar'>
       <div className='navbar-brand'>
         <Link to='/' className='navbar-item'>
           <img src='https://bulma.io/images/bulma-logo.png' width='112' height='28' alt='Bulma' />
         </Link>
+        <a
+          role='button'
+          class='navbar-burger'
+          aria-label='menu'
+          aria-expanded='false'
+          data-target='navbarTarget'>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+        </a>
       </div>
-      <div className='navbar-start'>
-        <div className='navbar-item'>
-          <Link to='/' className='button is-success'>
-            Message Board
-          </Link>
+      <div id='navbarTarget' className='navbar-menu'>
+        <div className='navbar-start'>
+          <div className='navbar-item'>
+            <Link to='/' className='button is-primary'>
+              Message Board
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className='navbar-end'>
-        <div className='navbar-item'>{userCheck()}</div>
+        <div className='navbar-end'>
+          <div className='navbar-item'>{userCheck()}</div>
+        </div>
       </div>
     </nav>
   );

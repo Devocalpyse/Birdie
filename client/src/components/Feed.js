@@ -10,7 +10,6 @@ export default function Feed() {
   let { messages } = useContext(MessageContext);
 
   const userFilter = messages.filter((message) => {
-    console.log(userId)
     return message.User.userId == userId;
   });
 
