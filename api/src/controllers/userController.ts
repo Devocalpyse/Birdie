@@ -11,8 +11,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
       newUser.username &&
       newUser.password &&
       newUser.firstName &&
-      newUser.lastName &&
-      newUser.favoriteColor
+      newUser.lastName
     ) {
       let hashedPassword = await hash(newUser.password);
       newUser.password = hashedPassword;
