@@ -30,6 +30,11 @@ export default function Feed() {
     );
   }
 
+  function localTime(time) {
+    let date = new Date(time);
+    return date.toLocaleString();
+  }
+
   return (
     <Section>
       <Title className='is-3'>Messages</Title>
@@ -45,6 +50,8 @@ export default function Feed() {
                   <small className='is-size-5 has-text-primary'>@{message.User.username}</small>
                 </Link>
                 <p className='is-size-4'>{message.message}</p>
+                <br />
+                <small>{localTime(message.updatedAt)}</small>
               </Media.Content>
               {checkUser(message.User.userId)}
             </Media>

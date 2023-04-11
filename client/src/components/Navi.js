@@ -37,7 +37,7 @@ export default function Navi() {
         </Link>
         <a
           role='button'
-          class='navbar-burger'
+          className='navbar-burger'
           aria-label='menu'
           aria-expanded='false'
           data-target='navbarTarget'>
