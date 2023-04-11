@@ -1,16 +1,16 @@
 import { useContext } from 'react';
-import { UserContext } from '../contexts/UserProvider';
+import { Section, Box, Media, Title } from 'reactbulma';
 import { MessageContext } from '../contexts/MessageProvider';
-import { Media } from 'reactbulma';
 
 export default function Feed() {
   let { messages } = useContext(MessageContext);
 
   return (
-    <div className='section'>
+    <Section>
+      <Title className='is-3'>Messages</Title>
       {messages.map((message) => {
         return (
-          <div className='box' key={message.messageId}>
+          <Box key={message.messageId}>
             <Media>
               <Media.Content>
                 <b className='is-size-5'>
@@ -20,9 +20,9 @@ export default function Feed() {
                 <p className='is-size-4'>{message.message}</p>
               </Media.Content>
             </Media>
-          </div>
+          </Box>
         );
       })}
-    </div>
+    </Section>
   );
 }

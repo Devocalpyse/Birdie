@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { UserProvider } from './contexts/UserProvider'; 
 import App from './App';
-import 'bulmaswatch/lumen/bulmaswatch.scss';
+import 'bulmaswatch/superhero/bulmaswatch.scss';
 import { MessageProvider } from './contexts/MessageProvider';
 
 ReactDOM.render(
