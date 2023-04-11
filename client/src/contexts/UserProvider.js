@@ -39,6 +39,16 @@ export function UserProvider(props) {
     });
   }
 
+  // Function to update a user's details
+  async function updateUser(user) {
+    const token = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    let res = await axios.put(`${baseUrl}/${user.userId}`, user, { headers: token });
+    return new Promise((resolve) => resolve(res.data));
+  }
+
   function logOut() {
     localStorage.removeItem('token');
     setUser({
@@ -47,7 +57,7 @@ export function UserProvider(props) {
       firstName: '',
       lastName: '',
       favoriteColor: null,
-    })
+    });
   }
 
   return (
@@ -58,6 +68,7 @@ export function UserProvider(props) {
         loginUser,
         getUser,
         logOut,
+        updateUser,
       }}>
       {props.children}
     </UserContext.Provider>

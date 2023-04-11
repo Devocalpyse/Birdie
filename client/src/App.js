@@ -4,7 +4,7 @@ import Navi from './components/Navi';
 import Home from './components/Home';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
-import SignUp from './components/SignUp';
+import UserForm from './components/UserForm';
 import SignIn from './components/SignIn';
 import TextBox from './components/TextBox';
 import EditMessage from './components/EditMessage';
@@ -18,8 +18,9 @@ function App() {
           <Route index element={<Feed />} />
         </Route>
         <Route path='signIn' element={<SignIn />} />
-        <Route path='signUp' element={<SignUp />} />
+        <Route path='signUp' element={<UserForm />} />
         <Route path='profile' element={<Profile />}>
+          <Route path='edit/:userId' element={<UserForm />} />
           <Route path=':userId' element={<Feed />} />
           <Route path='*' element={<p>User not found.</p>} />
         </Route>

@@ -9,10 +9,10 @@ export default function Navi() {
     if (user.userId === '') {
       return (
         <div className='buttons'>
-          <Link to='/signIn' className='button is-dark'>
+          <Link to='/signIn' className='button is-rounded is-dark'>
             Sign In
           </Link>
-          <Link to='/signUp' className='button'>
+          <Link to='/signUp' className='button is-rounded'>
             Sign Up
           </Link>
         </div>
@@ -20,10 +20,10 @@ export default function Navi() {
     } else {
       return (
         <div className='buttons'>
-          <Link to={`/profile/${user.userId}`} className='button is-dark'>
+          <Link to={`/profile/${user.userId}`} className='button is-rounded is-dark'>
             View Profile
           </Link>
-          <button className='button is-danger' onClick={() => logOut()}>
+          <button className='button is-rounded is-danger' onClick={() => logOut()}>
             Log Out
           </button>
         </div>
@@ -51,7 +51,7 @@ export default function Navi() {
       <div id='navbarTarget' className='navbar-menu'>
         <div className='navbar-start'>
           <div className='navbar-item'>
-            <Link to='/' className='button is-primary'>
+            <Link to='/' className='button is-rounded is-primary'>
               Message Board
             </Link>
           </div>

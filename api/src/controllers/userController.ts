@@ -7,7 +7,13 @@ export const createUser: RequestHandler = async (req, res, next) => {
   console.log(newUser);
 
   try {
-    if (newUser.username && newUser.password && newUser.firstName && newUser.lastName && newUser.favoriteColor) {
+    if (
+      newUser.username &&
+      newUser.password &&
+      newUser.firstName &&
+      newUser.lastName &&
+      newUser.favoriteColor
+    ) {
       let hashedPassword = await hash(newUser.password);
       newUser.password = hashedPassword;
 
@@ -58,5 +64,30 @@ export const getUser: RequestHandler = async (req, res, next) => {
     res.status(200).json(returnUser);
   } else {
     res.status(401).send();
+  }
+};
+
+export const updateUser: RequestHandler = async (req, res, next) => {
+  // verify the user
+  let user: User | null = await verifyUser(req);
+
+  if (!user) {
+    return res.status(401).send();
+  }
+
+  let { userId, username, firstName, lastName, favoriteColor } = req.body;
+
+  if (userId && username && firstName && lastName && favoriteColor) {
+    let updatedUser = {
+      userId,
+      username,
+      firstName,
+      lastName,
+      favoriteColor,
+    };
+    await User.update(updatedUser, { where: { userId: user.userId } });
+    res.status(200).send();
+  } else {
+    res.status(400).send();
   }
 };

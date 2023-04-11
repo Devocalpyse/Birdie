@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { UserContext } from '../contexts/UserProvider';
 import { Section, Title, Table, Level, Button } from 'reactbulma';
 
@@ -34,10 +34,10 @@ export default function Profile() {
               </Title>
             </Level.Item>
           </Level.Left>
-          {userId ==+ user.userId ? (
+          {userId == user.userId ? (
             <Level.Right>
               <Level.Item>
-                <Button>Edit Profile</Button>
+                <Link to={`/profile/edit/${userId}`} className='button is-rounded'>Edit Profile</Link>
               </Level.Item>
             </Level.Right>
           ) : null}

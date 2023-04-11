@@ -1,10 +1,14 @@
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../contexts/UserProvider';
 import { Box, Button, Field, Section } from 'reactbulma';
 
-export default function SignUp() {
+export default function UserForm() {
+  const navigate = useNavigate();
+  const { createUser, updateUser } = useContext(UserContext);
+  const { userId } = useParams();
   const [user, setUser] = useState({
+    userId: userId,
     username: '',
     password: '',
     firstName: '',
@@ -12,27 +16,44 @@ export default function SignUp() {
     favoriteColor: undefined,
   });
 
-  const navigate = useNavigate();
-  const { createUser } = useContext(UserContext);
+  let { username, password, firstName, lastName, favoriteColor } = user;
+
+  useEffect(() => {
+    if (!user.userId) return null;
+    async function fetch() {
+      let res = await fetch(`/api/users/${user.userId}`);
+      let data = await res.json();
+      setUser(data);
+    }
+    fetch();
+  });
+
+  function optionSelect() {
+    if (user.userId === undefined) {
+      return createUser(user)
+        .then(navigate('/signIn'))
+        .catch((error) => {
+          console.log(error);
+          window.alert('Failed registration: error creating user');
+        });
+    } else {
+      return updateUser(user)
+        .then(navigate('/signIn'))
+        .catch((error) => {
+          console.log(error);
+          window.alert('Failed registration: error updating user');
+        });
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(user);
-    createUser(user)
-      .then(() => {
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-        window.alert('Failed registration: error creating user');
-      });
+    optionSelect();
   }
 
   function handleChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
   }
-
-  let { username, password, firstName, lastName, favoriteColor } = user;
 
   return (
     <Section>
@@ -51,19 +72,21 @@ export default function SignUp() {
               />
             </div>
           </Field>
-          <Field>
-            <label className='label is-size-4'>Password</label>
-            <div className='control'>
-              <input
-                className='input is-rounded'
-                type='password'
-                name='password'
-                placeholder='Password'
-                value={password}
-                onChange={handleChange}
-              />
-            </div>
-          </Field>
+          {user.userId === undefined ? (
+            <Field>
+              <label className='label is-size-4'>Password</label>
+              <div className='control'>
+                <input
+                  className='input is-rounded'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                  value={password}
+                  onChange={handleChange}
+                />
+              </div>
+            </Field>
+          ) : null}
           <Field>
             <label className='label is-size-4'>First Name</label>
             <div className='control'>
