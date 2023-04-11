@@ -13,6 +13,10 @@ export default function Feed() {
     return message.User.userId == userId;
   });
 
+  function remove(messageId) {
+    deleteMessage(messageId);
+  }
+
   function checkParams() {
     if (!userId) {
       return messages;
@@ -28,7 +32,7 @@ export default function Feed() {
         <Link to={`/message/${message.messageId}`} className='button is-warning'>
           Edit
         </Link>{' '}
-        <Button danger onClick={() => deleteMessage(message.messageId)}>Delete</Button>
+        <Button danger onClick={() => remove(message.messageId)}>Delete</Button>
       </Media.Right>
     );
   }

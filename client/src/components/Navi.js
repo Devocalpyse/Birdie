@@ -34,9 +34,6 @@ export default function Navi() {
   return (
     <nav className='navbar'>
       <div className='navbar-brand'>
-        <Link to='/' className='navbar-item'>
-          <img src='https://bulma.io/images/bulma-logo.png' width='112' height='28' alt='Bulma' />
-        </Link>
         <a
           role='button'
           className='navbar-burger'

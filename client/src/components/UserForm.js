@@ -19,7 +19,7 @@ export default function UserForm() {
   let { username, password, firstName, lastName, favoriteColor } = user;
 
   useEffect(() => {
-    if (!user.userId) return null;
+    if (!user.userId) return;
     async function fetch() {
       let res = await fetch(`/api/users/${user.userId}`);
       let data = await res.json();
