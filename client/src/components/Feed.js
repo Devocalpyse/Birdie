@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Section, Box, Media, Title, Button } from 'reactbulma';
 import { MessageContext } from '../contexts/MessageProvider';
 import { UserContext } from '../contexts/UserProvider';
@@ -7,7 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 export default function Feed() {
   const { userId } = useParams();
   const { user } = useContext(UserContext);
-  let { messages } = useContext(MessageContext);
+  let { messages, deleteMessage } = useContext(MessageContext);
 
   const userFilter = messages.filter((message) => {
     return message.User.userId == userId;
@@ -28,7 +28,7 @@ export default function Feed() {
         <Link to={`/message/${message.messageId}`} className='button is-warning'>
           Edit
         </Link>{' '}
-        <Button danger>Delete</Button>
+        <Button danger onClick={() => deleteMessage(message.messageId)}>Delete</Button>
       </Media.Right>
     );
   }

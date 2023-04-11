@@ -35,7 +35,7 @@ export function MessageProvider(props) {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
-    await axios.post(baseUrl, message, { headers: token })
+    await axios.post(baseUrl, message, { headers: token });
     getAllMessages();
   }
 
@@ -49,6 +49,15 @@ export function MessageProvider(props) {
     getAllMessages();
   }
 
+  async function deleteMessage(messageId) {
+    const token = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    await axios.delete(`${baseUrl}/${messageId}`, { headers: token });
+    getAllMessages();
+  }
+
   return (
     <MessageContext.Provider
       value={{
@@ -57,6 +66,7 @@ export function MessageProvider(props) {
         getMessageById,
         createMessage,
         updateMessage,
+        deleteMessage,
       }}>
       {props.children}
     </MessageContext.Provider>
