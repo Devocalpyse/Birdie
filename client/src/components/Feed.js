@@ -9,15 +9,18 @@ export default function Feed() {
   const { user } = useContext(UserContext);
   let { messages } = useContext(MessageContext);
 
-  useEffect(() => {
-    if (!userId) return;
-    console.log('Feed.useEffect() will now run...');
-    const userFilter = messages.filter((message) => {
-      return message.User.userId === userId;
-    });
+  const userFilter = messages.filter((message) => {
+    console.log(userId)
+    return message.User.userId == userId;
+  });
 
-    messages = userFilter;
-  }, [userId]);
+  function checkParams() {
+    if (!userId) {
+      return messages;
+    } else {
+      return userFilter;
+    }
+  }
 
   function checkUser(messageUserId) {
     if (messageUserId !== user.userId) return;
@@ -31,7 +34,7 @@ export default function Feed() {
   return (
     <Section>
       <Title className='is-3'>Messages</Title>
-      {messages.map((message) => {
+      {checkParams().map((message) => {
         return (
           <Box key={message.messageId}>
             <Media>
