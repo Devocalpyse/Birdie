@@ -6,6 +6,8 @@ import Feed from './components/Feed';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
+import TextBox from './components/TextBox';
+import EditMessage from './components/EditMessage';
 
 function App() {
   return (
@@ -21,10 +23,10 @@ function App() {
           <Route path=':userId' element={<Feed />} />
           <Route path='*' element={<p>User not found.</p>} />
         </Route>
-        {/* <Route path='message' element={<Message />}>
-          <Route path=':messageId' element={<Message />} />
-          <Route path='*' element={<NotFound err="Message not found." />} />
-        </Route> */}
+        <Route path='message' element={<EditMessage />}>
+          <Route path=':messageId' element={<TextBox />} />
+          <Route path='*' element={<p>No message found. Wrong id?</p>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

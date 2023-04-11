@@ -35,9 +35,8 @@ export function MessageProvider(props) {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
-    let res = await axios.post(baseUrl, message, { headers: token });
+    await axios.post(baseUrl, message, { headers: token })
     getAllMessages();
-    return new Promise((resolve) => resolve(res.data));
   }
 
   // PUT a message
@@ -46,8 +45,8 @@ export function MessageProvider(props) {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     };
 
-    let res = await axios.put(`${baseUrl}/${message.id}`, message, { headers: token });
-    return new Promise((resolve) => resolve(res.data));
+    await axios.put(`${baseUrl}/${message.messageId}`, message, { headers: token });
+    getAllMessages();
   }
 
   return (

@@ -21,11 +21,14 @@ export default function Feed() {
     }
   }
 
-  function checkUser(messageUserId) {
-    if (messageUserId !== user.userId) return;
+  function checkUser(message) {
+    if (message.User.userId !== user.userId) return;
     return (
       <Media.Right>
-        <Button warning>Edit</Button> <Button danger>Delete</Button>
+        <Link to={`/message/${message.messageId}`} className='button is-warning'>
+          Edit
+        </Link>{' '}
+        <Button danger>Delete</Button>
       </Media.Right>
     );
   }
@@ -53,7 +56,7 @@ export default function Feed() {
                 <br />
                 <small>{localTime(message.updatedAt)}</small>
               </Media.Content>
-              {checkUser(message.User.userId)}
+              {checkUser(message)}
             </Media>
           </Box>
         );
