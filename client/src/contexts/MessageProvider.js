@@ -36,6 +36,7 @@ export function MessageProvider(props) {
     };
 
     let res = await axios.post(baseUrl, message, { headers: token });
+    getAllMessages();
     return new Promise((resolve) => resolve(res.data));
   }
 

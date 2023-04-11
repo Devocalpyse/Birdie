@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Textarea, Title, Section, Box, Level, Field, Control, Button } from 'reactbulma';
 import { MessageContext } from '../contexts/MessageProvider';
 
 export default function TextBox() {
-  const { getMessageById } = useContext(MessageContext);
+  const { getMessageById, createMessage, updateMessage } = useContext(MessageContext);
   const { messageId } = useParams();
+  const navigate = useNavigate();
   const [message, setMessage] = useState({
     messageId: messageId,
     message: '',
@@ -19,6 +20,14 @@ export default function TextBox() {
     fetch();
   }, [message.messageId]);
 
+  function optionSelect() {
+    if (message.messageId === undefined) {
+      return createMessage(message);
+    } else {
+      return updateMessage(message).then(navigate('/'));
+    }
+  }
+
   function handleChange(event) {
     setMessage((preValue) => {
       return { ...preValue, [event.target.name]: event.target.value };
@@ -27,7 +36,7 @@ export default function TextBox() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    alert(message);
+    optionSelect();
   }
 
   return (
@@ -37,7 +46,7 @@ export default function TextBox() {
         <form onSubmit={handleSubmit}>
           <Field>
             <Control>
-              <Textarea onChange={handleChange} />
+              <Textarea name="message" value={message.message} onChange={handleChange} />
             </Control>
           </Field>
           <Level>
