@@ -104,7 +104,7 @@ export default function SignUp() {
             </div>
           </Field>
           <br />
-          <Button primary className='is-large mx-auto is-flex is-justify-content-center is-fullwidth' type='submit'>
+          <Button primary className='is-medium is-rounded is-fullwidth' type='submit'>
             Sign Up
           </Button>
         </form>

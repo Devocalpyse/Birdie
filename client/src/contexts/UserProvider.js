@@ -22,13 +22,12 @@ export function UserProvider(props) {
   }
 
   // Function to login a user
-  async function loginUser(username, password) {
-    let user = { username, password };
-
-    let res = await axios.post(`${baseUrl}/login`, user);
+  async function loginUser(login) {
+    let res = await axios.post(`${baseUrl}/login`, login);
     localStorage.setItem('token', res.data.token);
 
-    let state = getUser(res.userId);
+    console.log(res.data.userId);
+    let state = await getUser(res.data.userId);
     setUser(state);
   }
 

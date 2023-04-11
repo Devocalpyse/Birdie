@@ -24,15 +24,15 @@ export const createUser: RequestHandler = async (req, res, next) => {
 
 export const loginUser: RequestHandler = async (req, res, next) => {
   let user: User | null = await User.findOne({ where: { username: req.body.username } });
-  console.log(user);
+  console.log('userController.loginUser: ', user);
 
   if (user) {
     let match = await compare(req.body.password, user.password);
 
     if (match) {
       let token = await signToken(user);
-      let { userId } = user;
-      res.status(200).json({ token, userId });
+      console.log('userController.loginUser.userId: ', user.userId);
+      res.status(200).json({ token, userId: user.userId });
     } else {
       res.status(401).send('Wrong password');
     }
@@ -43,6 +43,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
 export const getUser: RequestHandler = async (req, res, next) => {
   let user: User | null = await User.findByPk(req.params.userId);
+  console.log('userController.getUser: ', req.params.userId);
 
   if (user) {
     let { userId, username, firstName, lastName, favoriteColor } = user;
