@@ -1,11 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Textarea, Title, Section, Box, Level, Field, Control, Button } from 'reactbulma';
+import { MessageContext } from '../contexts/MessageProvider';
 
 export default function TextBox() {
-  const [message, setMessage] = useState();
+  const { getMessageById } = useContext(MessageContext);
+  const { messageId } = useParams();
+  const [message, setMessage] = useState({
+    messageId: messageId,
+    message: '',
+  });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  useEffect(() => {
+    if (message.messageId === undefined) return;
+    async function fetch() {
+      await getMessageById(message.messageId).then((message) => setMessage(message));
+    }
+    fetch();
+  }, [message.messageId]);
+
+  function handleChange(event) {
+    setMessage((preValue) => {
+      return { ...preValue, [event.target.name]: event.target.value };
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
     alert(message);
   }
 
@@ -16,11 +37,7 @@ export default function TextBox() {
         <form onSubmit={handleSubmit}>
           <Field>
             <Control>
-              <Textarea
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                }}
-              />
+              <Textarea onChange={handleChange} />
             </Control>
           </Field>
           <Level>

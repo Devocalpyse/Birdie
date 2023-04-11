@@ -17,8 +17,7 @@ export default function Home() {
           ) : null}
         </Hero.Body>
       </Hero>
-      <h1></h1>
-      <TextBox />
+      {user.userId ? <TextBox /> : null}
       <Outlet />
     </div>
   );

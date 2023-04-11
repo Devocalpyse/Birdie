@@ -9,7 +9,7 @@ export function UserProvider(props) {
     username: '',
     firstName: '',
     lastName: '',
-    favoriteColor: '',
+    favoriteColor: ''
   });
 
   // Defining base url for users
@@ -41,10 +41,7 @@ export function UserProvider(props) {
       .get(path)
       .then((res) => {
         console.log(res.data)
-        return { username: res.data.username }
-
-
-        // return new Promise(resolve => resolve(res.data));
+        setUser(res.data)
       })
       .catch((err) => {
         console.log(err);

@@ -25,11 +25,7 @@ export function MessageProvider(props) {
 
   // GET a single message
   async function getMessageById(messageId) {
-    const token = {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    };
-
-    let res = await axios.get(`${baseUrl}/${messageId}`, { headers: token });
+    let res = await axios.get(`${baseUrl}/${messageId}`);
     return new Promise((resolve) => resolve(res.data));
   }
 
