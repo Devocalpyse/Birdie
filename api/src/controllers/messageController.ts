@@ -3,7 +3,7 @@ import { Message } from '../models/Message';
 import { User } from '../models/User';
 import { verifyUser } from '../services/auth';
 
-export const getAllMessages: RequestHandler = async (req, res) => {
+export const getAllMessages: RequestHandler = async (req, res, next) => {
   const messages = await Message.findAll();
   res.status(200).json(messages);
 };

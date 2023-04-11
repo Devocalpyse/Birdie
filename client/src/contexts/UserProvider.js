@@ -13,7 +13,7 @@ export function UserProvider(props) {
   });
 
   // Defining base url for users
-  const baseUrl = process.env.BASE_URL_USERS;
+  const baseUrl = 'http://localhost:3000/api/users';
 
   // Function to create a new user
   async function createUser(username, password, firstName, lastName, favoriteColor) {
@@ -36,12 +36,19 @@ export function UserProvider(props) {
 
   // Function to get a user's details by id
   async function getUser(userId) {
-    const token = {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    };
+    let path = `${baseUrl}/${userId}`;
+    return await axios
+      .get(path)
+      .then((res) => {
+        console.log(res.data)
+        return { username: res.data.username }
 
-    let res = await axios.get(`${baseUrl}/${userId}`, { headers: token });
-    return new Promise((resolve) => resolve(res));
+
+        // return new Promise(resolve => resolve(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
